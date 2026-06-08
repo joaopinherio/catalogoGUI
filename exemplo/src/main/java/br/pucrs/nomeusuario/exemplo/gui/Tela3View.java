@@ -82,8 +82,7 @@ public class Tela3View extends VerticalLayout {
             Notification.show("Você precisa aceitar os termos de serviço.", 3000, Notification.Position.TOP_CENTER)
                     .addThemeVariants(NotificationVariant.LUMO_ERROR);
         } else {
-            if (nome.getValue().equals("") || email.getValue().equals("") ||
-                pais.getValue() == null || dataNascimento.getValue() == null) {
+            if (nome.getValue().equals("")) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
             } else {
                 Pessoa p = new Pessoa(nome.getValue(),
