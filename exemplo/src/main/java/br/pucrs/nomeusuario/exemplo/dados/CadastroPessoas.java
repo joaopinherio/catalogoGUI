@@ -49,4 +49,17 @@ public class CadastroPessoas {
             p.setPais(upd.getPais());
         }
     }
+
+    public boolean remover(String nome){
+        return lista.remove(achaPessoaByNome(nome));
+    }
+
+    public Pessoa achaPessoaByNome(String nome){
+        for(Pessoa p : lista){
+            if(p.getNome() == nome){
+                return p;
+            }
+        }
+        return null;
+    }
 }

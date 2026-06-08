@@ -60,16 +60,42 @@ public class Tela3View extends VerticalLayout {
 
         // Define título do formulário
         add(new H2("Tela 3 - Remover cadastro de pessoas - Remocao"));
+
+    
     
         // Definicoes de botoes de acao 
         Button deleteButton = new Button("Deletar", VaadinIcon.CHECK.create());
         deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteButton.addClickShortcut(Key.ENTER);
+        //deleteButton.addClickListener(click -> this)
 
         // Define o botão de retorno à página principal
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
 
+    }
+
+    
+    private void removerFormulario() {
+        if (aceitaTermos.getValue() == false) {
+            Notification.show("Você precisa aceitar os termos de serviço.", 3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
+        } else {
+            if (nome.getValue().equals("") || email.getValue().equals("") ||
+                pais.getValue() == null || dataNascimento.getValue() == null) {
+                Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
+            } else {
+                Pessoa p = new Pessoa(nome.getValue(),
+                        email.getValue(),
+                        pais.getValue(),
+                        dataNascimento.getValue());
+                cadPessoas.cadastrar(p);
+                String mensagem = "Usuário " + p.getNome() + " salvo com sucesso!";
+                Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+            }
+            grid.getDataProvider().refreshAll();
+            limparFormulario();
+        }
     }
 }
