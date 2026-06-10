@@ -85,16 +85,19 @@ public class Tela3View extends VerticalLayout {
             if (nome.getValue().equals("")) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
             } else {
-                Pessoa p = new Pessoa(nome.getValue(),
-                        email.getValue(),
-                        pais.getValue(),
-                        dataNascimento.getValue());
-                cadPessoas.cadastrar(p);
-                String mensagem = "Usuário " + p.getNome() + " salvo com sucesso!";
-                Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+                Pessoa p = cadPessoas.achaPessoaByNome(nome.getValue());
+                if(p != null){
+                    String mensagem = "Usuário " + p.getNome() + " removido com sucesso!";
+                    cadPessoas.remover(p);
+                    Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+                }else{ 
+                    String mensagem = "Usuário selecionado nao existe!";
+                    Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+                }
             }
             grid.getDataProvider().refreshAll();
-            limparFormulario();
+            nome.clear();//limpa dados (limpaFormulario)
+            nome.focus();
         }
     }
 }

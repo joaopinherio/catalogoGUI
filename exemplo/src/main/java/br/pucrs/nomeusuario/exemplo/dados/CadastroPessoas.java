@@ -50,8 +50,8 @@ public class CadastroPessoas {
         }
     }
 
-    public boolean remover(String nome){
-        return lista.remove(achaPessoaByNome(nome));
+    public boolean remover(Pessoa p){
+        return lista.remove(p);
     }
 
     public Pessoa achaPessoaByNome(String nome){
