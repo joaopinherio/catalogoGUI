@@ -56,7 +56,7 @@ public class CadastroPessoas {
 
     public Pessoa achaPessoaByNome(String nome){
         for(Pessoa p : lista){
-            if(p.getNome() == nome){
+            if(p.getNome().equals(nome)){
                 return p;
             }
         }
