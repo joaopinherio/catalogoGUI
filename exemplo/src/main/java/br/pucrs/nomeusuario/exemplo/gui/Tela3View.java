@@ -61,13 +61,27 @@ public class Tela3View extends VerticalLayout {
         // Define título do formulário
         add(new H2("Tela 3 - Remover cadastro de pessoas - Remocao"));
 
-    
+        // Configuração do formulário
+        FormLayout formLayout = new FormLayout(nome, email, dataNascimento, pais, aceitaTermos);
     
         // Definicoes de botoes de acao 
         Button deleteButton = new Button("Deletar", VaadinIcon.CHECK.create());
         deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteButton.addClickShortcut(Key.ENTER);
-        //deleteButton.addClickListener(click -> this)
+        deleteButton.addClickListener(click -> this.removerFormulario());
+
+        // Adiciona botoes de ação em um layout horizontal
+        HorizontalLayout botoesLayout = new HorizontalLayout(deleteButton);
+
+        // Configuração da Grid
+        grid.setItems(cadPessoas.getLista());
+//        grid.setColumns("nome", "email", "pais", "formattedDataNascimento");
+        grid.setColumns("nome", "email", "pais");
+        grid.addColumn(Pessoa::getFormattedDataNascimento).setHeader("Data nascimento");
+
+        // Monta todos os elementos na janela
+        add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
+        add(new Hr());
 
         // Define o botão de retorno à página principal
         Button backButton = new Button("Voltar");
